@@ -1,5 +1,41 @@
+version: '3.8'
+
 services:
-  server:
-    build: node
+  app1:
+    build:
+      context: .
+      dockerfile: ./node
+    restart: always
+  app2:
+    build:
+      context: .
+      dockerfile: ./node
+    restart: always
+  app3:
+    build:
+      context: .
+      dockerfile: ./node
+    restart: always
+  app4:
+    build:
+      context: .
+      dockerfile: ./node
+    restart: always
+  app5:
+    build:
+      context: .
+      dockerfile: ./node
+    restart: always
+
+  nginx:
+    image: nginx:alpine
     ports:
-      - 3000:3000
+      - "3000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
+      - app3
+      - app4
+      - app5
